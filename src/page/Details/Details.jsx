@@ -1,45 +1,44 @@
 import { useForm } from 'react-hook-form';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
-import img_1 from '../../img/IMG-20240728-WA0003.jpg';
-import { useState } from 'react';
-import Benifit from '../../component/Benifit';
+import imgProduct from '../../img/IMG-20240728-WA0003.jpg';
+import { useState, useEffect } from 'react';
+import Benefit from '../../component/Benifit';
 import Review from '../../component/Review';
+
 
 const Details = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const [pice, setPice] = useState(1);
+  const [quantity, setQuantity] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
-
-
-
-
-
-
-
-
+  const [total, setTotal] = useState(quantity * 1250);
 
   const onSubmit = (data) => {
-    console.log(data);
+    const orderInfo = {
+      ...data,
+      total,
+      quantity
+    };
+    console.log(orderInfo);
   };
 
   // Simulate loading
-  useState(() => {
-    setTimeout(() => setIsLoading(false), 2000); 
+  useEffect(() => {
+    setTimeout(() => setIsLoading(false), 2000);
   }, []);
 
   return (
     <div className="container mx-auto p-4">
       <h3 className="text-center text-3xl font-bold mb-6 text-primary">সহজে কোষ্ঠকাঠিন্যের কষ্ট থেকে মুক্তির উপায়</h3>
       <div className="border-2 border-secondary rounded-lg p-4 mb-6">
-        <h4 className="text-2xl font-semibold text-center mb-4 text-primary border-b-2 pb-2">ব্যবহার করার নিয়ম</h4>
+        <h4 className="text-2xl font-semibold text-center mb-4 text-primary border-b-2 pb-2">খাওয়ার নিয়ম</h4>
         <p className="text-justify text-secondary">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellat praesentium soluta esse vitae eum dolorum cupiditate eius ab vel adipisci doloribus sed laboriosam, porro qui vero saepe facilis odio expedita officiis, voluptas ducimus amet maiores eligendi! Rem modi eius minima neque, labore harum voluptates quibusdam obcaecati nemo ipsam quam porro.
+          প্রতিদিন রাতে, খাবার ৩০ মিনিট পরে, আধা-চামচ হালুয়া চেটে খাবেন অথবা পানিতে মিক্স করে খাবেন। অথবা দুধ থাকলে দুধের সাথে মিক্স করে খাবেন।
         </p>
       </div>
 
       <div className="flex justify-center mb-6">
-        {isLoading ? <Skeleton height={300} width={300} /> : <img src={img_1} alt="Product" className="rounded-lg shadow-lg" />}
+        {isLoading ? <Skeleton height={300} width={300} /> : <img src={imgProduct} alt="Product" className="rounded-lg shadow-lg" />}
       </div>
 
       <div className="flex justify-center mb-6">
@@ -90,13 +89,13 @@ const Details = () => {
               {errors.address && <span className="text-red-500 text-sm">{errors.address.message}</span>}
             </div>
           </div>
-        
+
           <div className="w-full md:w-1/2 p-2">
             <div className="p-6 bg-gray-100 text-gray-800 rounded-lg shadow-md">
-              <h3 className='text-xl font-semibold my-3'>আপনার অর্ডার <i className="fa-solid fa-badge-check fa-fw"></i></h3>
+              <h3 className="text-xl font-semibold my-3">আপনার অর্ডার <i className="fa-solid fa-badge-check fa-fw"></i></h3>
               <div className="flex items-center gap-4 mb-6">
                 <div className="w-16 h-16 rounded-full overflow-hidden">
-                  {isLoading ? <Skeleton circle height={64} width={64} /> : <img src={img_1} alt="Avatar" className="w-full h-full object-cover" />}
+                  {isLoading ? <Skeleton circle height={64} width={64} /> : <img src={imgProduct} alt="Avatar" className="w-full h-full object-cover" />}
                 </div>
                 <div>
                   <h2 className="text-2xl font-bold">নাম</h2>
@@ -104,29 +103,37 @@ const Details = () => {
               </div>
 
               <div className="mb-6">
-                <h3 className="text-xl font-semibold">প্রতি পিসের মূল্য: ১২৫০ টাকা</h3>
+                <h3 className="text-xl font-semibold">এক ফাইল ১২৫০ টাকা</h3>
               </div>
 
               <div className="mb-6">
-                <h3 className="text-xl font-semibold">মোট মূল্য: {pice * 1250} টাকা</h3>
+                <h3 className="text-xl font-semibold">মোট মূল্য: {total} টাকা</h3>
               </div>
 
               <div className="mb-6">
                 <div className="flex items-center gap-4">
-                  <h3 className="text-xl font-semibold">কতো পিস নিবেন: {pice}</h3>
+                  <h3 className="text-xl font-semibold">কতো ফাইল নিবেন: {quantity}</h3>
                   <div>
                     <button
                       type="button"
                       className="bg-blue-500 text-white py-2 px-4 rounded mr-2"
-                      onClick={() => setPice(pice + 1)}
+                      onClick={() => {
+                        const newQuantity = quantity + 1;
+                        setQuantity(newQuantity);
+                        setTotal(newQuantity * 1250);
+                      }}
                     >
                       +
                     </button>
                     <button
                       type="button"
-                      disabled={pice <= 1}
+                      disabled={quantity <= 1}
                       className="bg-red-500 text-white py-2 px-4 rounded"
-                      onClick={() => setPice(pice - 1)}
+                      onClick={() => {
+                        const newQuantity = quantity - 1;
+                        setQuantity(newQuantity);
+                        setTotal(newQuantity * 1250);
+                      }}
                     >
                       -
                     </button>
@@ -143,13 +150,13 @@ const Details = () => {
             </div>
           </div>
         </div>
-        
+
         <div className="flex justify-center">
           <button type="submit" className="btn w-full bg-primary mt-4 text-white">অর্ডার করুন</button>
         </div>
       </form>
 
-      <Benifit/>
+      <Benefit/>
       <Review/>
     </div>
   );
