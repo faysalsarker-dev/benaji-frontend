@@ -13,7 +13,7 @@ const Footer = () => {
                 </div>
             </div>
         
-            <aside className="mt-4">
+            <aside className="mt-4 border-t pt-2">
                 <p className="font-bold">© {new Date().getFullYear()} - সর্বস্বত্ব সংরক্ষিত BENAJI দ্বারা</p>
             </aside>
         </footer>

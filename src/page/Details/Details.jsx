@@ -1,17 +1,33 @@
 import { useForm } from 'react-hook-form';
-import Skeleton from 'react-loading-skeleton';
+
 import 'react-loading-skeleton/dist/skeleton.css';
 import imgProduct from '../../img/IMG-20240728-WA0003.jpg';
-import { useState, useEffect } from 'react';
-import Benefit from '../../component/Benifit';
-import Review from '../../component/Review';
+import { useState } from 'react';
 
+import Review from '../../component/Review';
+import { useMutation } from "@tanstack/react-query";
+import useAxios from '../../Hook/useAxios';
+import toast from 'react-hot-toast';
+import Benefit from '../../component/Benifit';
 
 const Details = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const [quantity, setQuantity] = useState(1);
-  const [isLoading, setIsLoading] = useState(true);
   const [total, setTotal] = useState(quantity * 1250);
+  const axiosCommon = useAxios();
+
+  const { mutateAsync } = useMutation({
+    mutationFn: async (info) => {
+      const { data: updatedData } = await axiosCommon.post(`/order`, info);
+      return updatedData;
+    },
+    onSuccess: () => {
+      toast.success('আপনার অর্ডার সফল হয়েছে!');
+    },
+    onError: () => {
+      toast.error('অর্ডার পাঠাতে সমস্যা হয়েছে। অনুগ্রহ করে আবার চেষ্টা করুন।');
+    },
+  });
 
   const onSubmit = (data) => {
     const orderInfo = {
@@ -19,26 +35,56 @@ const Details = () => {
       total,
       quantity
     };
-    console.log(orderInfo);
+    mutateAsync(orderInfo);
   };
 
-  // Simulate loading
-  useEffect(() => {
-    setTimeout(() => setIsLoading(false), 2000);
-  }, []);
+
+
+  const benefitsData = [
+    {
+      description: 'এক থেকে দুই মিনিট সময় পাই না তাদের সময় বাড়বে ।'
+    },
+    {
+      description: 'বী-র্য গাঢ় এবং শক্তিশালী করে'
+    },
+    {
+      description: 'শু-ক্রানুর পরিমান বৃদ্ধি করে'
+    },
+    {
+      description: 'দ্রুত বীর্যপাত বন্ধ করে '
+    },
+    {
+      description: 'যৌ-ন শক্তি বৃদ্ধি করে'
+    },
+    {
+      description: 'আগা মোটা-গোড়া চিকন-রগ পুলা'
+    },
+    {
+      description: 'লিঙ্গ বাঁকা'
+    },
+    {
+      description: 'লিঙ্গ ছোট?'
+    },
+    {
+      description: 'লিঙ্গ ষ্টং হয়না'
+    },
+  ];
+
 
   return (
     <div className="container mx-auto p-4">
-      <h3 className="text-center text-3xl font-bold mb-6 text-primary">সহজে কোষ্ঠকাঠিন্যের কষ্ট থেকে মুক্তির উপায়</h3>
+      <h3 className="text-center text-5xl font-bold mb-6 text-primary">আমাদের হালুয়া। দেশের লক্ষ লক্ষ মানুষ উপকৃত হচ্ছে</h3>
       <div className="border-2 border-secondary rounded-lg p-4 mb-6">
         <h4 className="text-2xl font-semibold text-center mb-4 text-primary border-b-2 pb-2">খাওয়ার নিয়ম</h4>
         <p className="text-justify text-secondary">
           প্রতিদিন রাতে, খাবার ৩০ মিনিট পরে, আধা-চামচ হালুয়া চেটে খাবেন অথবা পানিতে মিক্স করে খাবেন। অথবা দুধ থাকলে দুধের সাথে মিক্স করে খাবেন।
+          
+নিয়মিত ৭ দিন সেবনেই প্রাথমিক ফলাফল বুঝতে শুরু করবেন। এবং এক মাস সেবনে স্থায়ীভাবে সমাধান পাবেন
         </p>
       </div>
 
       <div className="flex justify-center mb-6">
-        {isLoading ? <Skeleton height={300} width={300} /> : <img src={imgProduct} alt="Product" className="rounded-lg shadow-lg" />}
+        <img src={imgProduct} alt="Product" className="rounded-lg shadow-lg" />
       </div>
 
       <div className="flex justify-center mb-6">
@@ -56,7 +102,7 @@ const Details = () => {
                 <span className="label-text text-secondary">আপনার নাম লিখুন :</span>
               </label>
               <input
-                {...register('name', { required: 'নাম লিখুন' })}
+                {...register('name', { required: 'নাম দেয়া আবশ্যক' })}
                 type="text"
                 placeholder="আপনার নাম এখানে লিখুন"
                 className={`input input-bordered w-full ${errors.name ? 'border-red-500' : ''}`}
@@ -69,7 +115,7 @@ const Details = () => {
                 <span className="label-text text-secondary">আপনার মোবাইল নাম্বার লিখুন :</span>
               </label>
               <input
-                {...register('phone', { required: 'মোবাইল নাম্বার লিখুন' })}
+                {...register('phone', { required: 'মোবাইল নাম্বার দেয়া আবশ্যক' })}
                 type="tel"
                 placeholder="আপনার মোবাইল নাম্বার এখানে লিখুন"
                 className={`input input-bordered w-full ${errors.phone ? 'border-red-500' : ''}`}
@@ -82,7 +128,7 @@ const Details = () => {
                 <span className="label-text text-secondary">আপনার ঠিকানা লিখুন :</span>
               </label>
               <textarea
-                {...register('address', { required: 'ঠিকানা লিখুন' })}
+                {...register('address', { required: 'ঠিকানা দেয়া আবশ্যক' })}
                 className={`textarea textarea-bordered h-24 w-full ${errors.address ? 'border-red-500' : ''}`}
                 placeholder="জেলা, উপজেলা/ থানা, ডেলিভারি এরিয়া"
               ></textarea>
@@ -95,7 +141,7 @@ const Details = () => {
               <h3 className="text-xl font-semibold my-3">আপনার অর্ডার <i className="fa-solid fa-badge-check fa-fw"></i></h3>
               <div className="flex items-center gap-4 mb-6">
                 <div className="w-16 h-16 rounded-full overflow-hidden">
-                  {isLoading ? <Skeleton circle height={64} width={64} /> : <img src={imgProduct} alt="Avatar" className="w-full h-full object-cover" />}
+                   <img src={imgProduct} alt="Avatar" className="w-full h-full object-cover" />
                 </div>
                 <div>
                   <h2 className="text-2xl font-bold">নাম</h2>
@@ -155,9 +201,9 @@ const Details = () => {
           <button type="submit" className="btn w-full bg-primary mt-4 text-white">অর্ডার করুন</button>
         </div>
       </form>
-
-      <Benefit/>
-      <Review/>
+      <h2 className="text-3xl text-center my-4 font-bold mb-8 text-primary">❤️হালুয়ার উপকারিতা ❤️ <br /> ❤️যে সমস্ত কাজগুলো করবে ❤️</h2>
+      <Benefit benefitsData={benefitsData} />
+      <Review />
     </div>
   );
 };
