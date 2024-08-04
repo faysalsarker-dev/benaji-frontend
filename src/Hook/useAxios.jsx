@@ -1,7 +1,9 @@
 import axios from "axios";
 
 const axiosCommon = axios.create({
-  baseURL: "http://localhost:5000"
+
+  baseURL: "https://api.benaji.info"
+  // baseURL: "http://localhost:5000"
 });
 
 const useAxios = () => {

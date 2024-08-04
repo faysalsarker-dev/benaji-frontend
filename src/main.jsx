@@ -13,9 +13,18 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <QueryClientProvider client={queryClient}>
       <RouterProvider router={router} />
       <Toaster
-  position="top-center"
-  reverseOrder={false}
-/>
+        position="top-center"
+        reverseOrder={false}
+        toastOptions={{
+          style: {
+            padding: '16px', 
+            fontSize: '30px',
+            borderRadius: '8px', 
+            backgroundColor: '#fffff', 
+            color: 'green', 
+          },
+        }}
+      />
     </QueryClientProvider>
   </React.StrictMode>
 );
