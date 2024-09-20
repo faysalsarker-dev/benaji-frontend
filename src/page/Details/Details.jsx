@@ -5,10 +5,12 @@ import imgProduct from '../../img/IMG-20240728-WA0003.jpg';
 import { useState } from 'react';
 
 
-import comment_1 from "../../comment/first_1.jpg";
-import comment_2 from "../../comment/first_2.jpg";
-import comment_3 from "../../comment/first_3.jpg";
-import comment_4 from "../../comment/first-4.jpg";
+import comment_1 from "../../comment/second_1.jpg";
+import comment_2 from "../../comment/second_2.jpg";
+import comment_3 from "../../comment/second_3.jpg";
+import comment_4 from "../../comment/second_4.jpg";
+import comment_5 from "../../comment/second_5.jpg";
+
 
 
 import Review from '../../component/Review';
@@ -22,8 +24,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Details = () => {
   const { register, handleSubmit, formState: { errors } ,reset} = useForm();
-  const [quantity, setQuantity] = useState(1);
-  const [total, setTotal] = useState(quantity * 1200);
+
   const [loading,setLoading]= useState(false)
   const axiosCommon = useAxios();
   const navigate = useNavigate()
@@ -33,6 +34,7 @@ const Details = () => {
     { image: comment_2 },
     { image: comment_3 },
     { image: comment_4 },
+    { image: comment_5 },
 
   ];
 
@@ -57,9 +59,9 @@ const Details = () => {
     setLoading(true)
     const orderInfo = {
       ...data,
-      total,
-      quantity,
-      product_name:'হালুয়ায়ে মুহাব্বত',
+      total:1200,
+      quantity:1,
+      product_name:'✔️ হালুয়ায়ে মুহাব্বত ',
       date:new Date(),
       status:'pending',
       page:1
@@ -71,7 +73,7 @@ const Details = () => {
 
   const benefitsData = [
     {
-      description: 'এক থেকে দুই মিনিট সময় পাই না তাদের সময় বাড়বে ।'
+      description: 'এক থেকে দুই মিনিট সময় পাই না তাদের সময় বাড়বে । ২৫ থেকে ৩০ মিনিট +'
     },
     {
       description: 'বী-র্য গাঢ় এবং শক্তিশালী করে'
@@ -108,15 +110,21 @@ const Details = () => {
         <p className=" text-black font-semibold text-center">
           প্রতিদিন রাতে, খাবার ৩০ মিনিট পরে, আধা-চামচ হালুয়া চেটে খাবেন অথবা পানিতে মিক্স করে খাবেন। অথবা দুধ থাকলে দুধের সাথে মিক্স করে খাবেন।
           
-নিয়মিত ৭ দিন সেবনেই প্রাথমিক ফলাফল বুঝতে শুরু করবেন। এবং এক মাস সেবনে স্থায়ীভাবে সমাধান পাবেন
+
         </p>
       </div>
+
+      <div className='flex justify-start text-center'>
+        <div className='bg-base-400 w-full bg-primary border-2 text-xl text-extra p-4 mb-2 rounded-lg'>
+          <h3>নিয়মিত ৭ দিন সেবনেই প্রাথমিক ফলাফল বুঝতে শুরু করবেন। এবং এক মাস সেবনে স্থায়ীভাবে সমাধান পাবেন</h3>
+        </div>
+      </div>
+  
       <div className='flex justify-center my-2'>
   <a href="tel:01612594964">
     <h3 className='text-2xl font-bold bg-primary rounded-lg text-white p-4'>কল করুন 01612594964</h3>
   </a>
 </div>
-
       <div className="flex justify-center mb-6">
         <img src={imgProduct} alt="Product" className="rounded-lg shadow-lg" />
       </div>
@@ -139,7 +147,7 @@ const Details = () => {
                 {...register('name', { required: 'নাম দেয়া আবশ্যক' })}
                 type="text"
                 placeholder="আপনার নাম এখানে লিখুন"
-                className={`input input-bordered w-full ${errors.name ? 'border-red-500' : ''}`}
+                className={`input input-bordered input-primary w-full ${errors.name ? 'border-red-500' : ''}`}
               />
               {errors.name && <span className="text-red-500 text-sm">{errors.name.message}</span>}
             </div>
@@ -152,7 +160,7 @@ const Details = () => {
                 {...register('phone', { required: 'মোবাইল নাম্বার দেয়া আবশ্যক' })}
                 type="tel"
                 placeholder="আপনার মোবাইল নাম্বার এখানে লিখুন"
-                className={`input input-bordered w-full ${errors.phone ? 'border-red-500' : ''}`}
+                className={`input input-bordered input-primary w-full ${errors.phone ? 'border-red-500' : ''}`}
               />
               {errors.phone && <span className="text-red-500 text-sm">{errors.phone.message}</span>}
             </div>
@@ -163,7 +171,7 @@ const Details = () => {
               </label>
               <textarea
                 {...register('address', { required: 'ঠিকানা দেয়া আবশ্যক' })}
-                className={`textarea textarea-bordered h-24 w-full ${errors.address ? 'border-red-500' : ''}`}
+                className={`textarea textarea-bordered textarea-primary h-24 w-full ${errors.address ? 'border-red-500' : ''}`}
                 placeholder="জেলা, উপজেলা/ থানা, ডেলিভারি এরিয়া"
               ></textarea>
               {errors.address && <span className="text-red-500 text-sm">{errors.address.message}</span>}
@@ -185,42 +193,16 @@ const Details = () => {
                 </div>
               </div>
 
-              {/* <div className="mb-6">
-                <h3 className="text-xl font-semibold">এক ফাইল ১২০০ টাকা</h3>
-              </div> */}
+           
               <div className="mb-6">
                 <div className="flex items-center gap-4">
                 <h3 className="text-xl font-semibold">এক ফাইল ১,২০০ টাকা</h3>
-                  {/* <div>
-                    <button
-                      type="button"
-                      className="bg-blue-500 text-white py-2 px-4 rounded mr-2"
-                      onClick={() => {
-                        const newQuantity = quantity + 1;
-                        setQuantity(newQuantity);
-                        setTotal(newQuantity * 1200);
-                      }}
-                    >
-                      +
-                    </button>
-                    <button
-                      type="button"
-                      disabled={quantity <= 1}
-                      className="bg-red-500 text-white py-2 px-4 rounded"
-                      onClick={() => {
-                        const newQuantity = quantity - 1;
-                        setQuantity(newQuantity);
-                        setTotal(newQuantity * 1200);
-                      }}
-                    >
-                      -
-                    </button>
-                  </div> */}
+               
                 </div>
               </div>
 
               <div className="mb-6">
-                <h3 className="text-xl font-semibold">মোট মূল্য: {total} টাকা</h3>
+                <h3 className="text-xl font-semibold">মোট মূল্য: ১,২০০ টাকা</h3>
               </div>
 
               

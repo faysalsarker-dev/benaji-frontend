@@ -32,8 +32,7 @@ import { useNavigate } from 'react-router-dom';
 
 function Product_2() {
     const { register, handleSubmit, formState: { errors },reset } = useForm();
-    const [quantity, setQuantity] = useState(1);
-    const [total, setTotal] = useState(quantity * 1150);
+   
     const [loading,setLoading]= useState(false)
     const axiosCommon = useAxios();
     const navigate = useNavigate()
@@ -72,10 +71,10 @@ function Product_2() {
       setLoading(true)
       const orderInfo = {
         ...data,
-        total,
-        quantity,
+        total:1150,
+        quantity:1,
         date:new Date(),
-        product_name:'আলকুশি',
+        product_name:'আলকুশি + জিনসেং',
         status:'pending',
         page:3
       };
@@ -213,7 +212,7 @@ function Product_2() {
                 {...register('name', { required: 'নাম দেয়া আবশ্যক' })}
                 type="text"
                 placeholder="আপনার নাম এখানে লিখুন"
-                className={`input input-bordered w-full ${errors.name ? 'border-red-500' : ''}`}
+                className={`input input-bordered input-primary w-full ${errors.name ? 'border-red-500' : ''}`}
               />
               {errors.name && <span className="text-red-500 text-sm">{errors.name.message}</span>}
             </div>
@@ -226,7 +225,7 @@ function Product_2() {
                 {...register('phone', { required: 'মোবাইল নাম্বার দেয়া আবশ্যক' })}
                 type="tel"
                 placeholder="আপনার মোবাইল নাম্বার এখানে লিখুন"
-                className={`input input-bordered w-full ${errors.phone ? 'border-red-500' : ''}`}
+                className={`input input-bordered input-primary w-full ${errors.phone ? 'border-red-500' : ''}`}
               />
               {errors.phone && <span className="text-red-500 text-sm">{errors.phone.message}</span>}
             </div>
@@ -237,7 +236,7 @@ function Product_2() {
               </label>
               <textarea
                 {...register('address', { required: 'ঠিকানা দেয়া আবশ্যক' })}
-                className={`textarea textarea-bordered h-24 w-full ${errors.address ? 'border-red-500' : ''}`}
+                className={`textarea textarea-bordered textarea-primary h-24 w-full ${errors.address ? 'border-red-500' : ''}`}
                 placeholder="জেলা, উপজেলা/ থানা, ডেলিভারি এরিয়া"
               ></textarea>
               {errors.address && <span className="text-red-500 text-sm">{errors.address.message}</span>}
@@ -250,59 +249,25 @@ function Product_2() {
           <div className="w-full md:w-1/2 p-2">
             <div className="p-6 bg-gray-100 text-gray-800 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold my-3">আপনার অর্ডার </h3>
-              <div className="flex items-center gap-4 mb-6">
-                <div className="w-16 h-16 rounded-full overflow-hidden">
-                   <img src={imgProduct} alt="Avatar" className="w-full h-full object-cover" />
+              <div className=" gap-4 mb-4">
+                <div className=" flex gap-2 overflow-hidden">
+                   <img src={imgProduct} alt="Avatar" className="w-16 h-16 rounded-full object-cover" />
+                   <img src={imgProduct_2} alt="Avatar" className="w-16 h-16 rounded-full object-cover" />
                 </div>
-                <div>
-                  <h2 className="text-2xl font-bold">নাম : আলকুশি</h2>
-                </div>
+              
               </div>
-
+              <div>
+                  <h2 className="text-2xl font-bold my-2">নাম : আলকুশি + জিনসেং</h2>
+                </div>
               <div className="mb-6">
                 <h3 className="text-xl font-semibold">এক ফাইল ১১৫০ টাকা</h3>
               </div>
 
               <div className="mb-6">
-                <h3 className="text-xl font-semibold">মোট মূল্য: {total} টাকা</h3>
+                <h3 className="text-xl font-semibold">মোট মূল্য: ১১৫০ টাকা</h3>
               </div>
 
-              <div className="mb-6">
-                {/* <div className="flex items-center gap-4">
-                  <h3 className="text-xl font-semibold">কতো ফাইল নিবেন: {quantity}</h3>
-
-
-
-                  <div>
-                    <button
-                      type="button"
-                      className="bg-blue-500 text-white py-2 px-4 rounded mr-2"
-                      onClick={() => {
-                        const newQuantity = quantity + 1;
-                        setQuantity(newQuantity);
-                        setTotal(newQuantity * 1250);
-                      }}
-                    >
-                      +
-                    </button>
-                    <button
-                      type="button"
-                      disabled={quantity <= 1}
-                      className="bg-red-500 text-white py-2 px-4 rounded"
-                      onClick={() => {
-                        const newQuantity = quantity - 1;
-                        setQuantity(newQuantity);
-                        setTotal(newQuantity * 1250);
-                      }}
-                    >
-                      -
-                    </button>
-                  </div>
-
-
-                  
-                </div> */}
-              </div>
+          
 
               <div>
                 <h4 className="text-2xl text-primary font-semibold mb-4">ক্যাশ অন ডেলিভারি</h4>

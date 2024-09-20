@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 
 import 'react-loading-skeleton/dist/skeleton.css';
-import imgProduct from './../img/IMG-20240728-WA0003.jpg';
+
 import { useState ,useRef} from 'react';
 
 
@@ -15,18 +15,19 @@ import { ScaleLoader } from 'react-spinners';
 
 import product from "../img/product_2.jpg";
 
-import comment_1 from "../comment/second_1.jpg";
-import comment_2 from "../comment/second_2.jpg";
-import comment_3 from "../comment/second_3.jpg";
-import comment_4 from "../comment/second_4.jpg";
-import comment_5 from "../comment/second_5.jpg";
+import comment_1 from "../comment/first_1.jpeg";
+import comment_2 from "../comment/first_2.jpeg";
+import comment_3 from "../comment/first_3.jpeg";
+import comment_4 from "../comment/first_4.jpeg";
+import comment_5 from "../comment/first_5.jpeg";
+
 import { useNavigate } from 'react-router-dom';
 
 const Product_1 = () => {
     const { register, handleSubmit, formState: { errors },reset } = useForm();
-    const [quantity, setQuantity] = useState(1);
+   
     const [loading,setLoading]= useState(false)
-    const [total, setTotal] = useState(quantity * 1250);
+   
     const axiosCommon = useAxios();
     const sectionRef = useRef(null);
     const navigate = useNavigate()
@@ -36,6 +37,7 @@ const Product_1 = () => {
       { image: comment_3 },
       { image: comment_4 },
       { image: comment_5 },
+
   
     ];
 
@@ -62,9 +64,9 @@ const Product_1 = () => {
       setLoading(true)
       const orderInfo = {
         ...data,
-        total,
-        quantity,
-        product_name:'হালুয়ায়ে মুহাব্বত',
+        total:1200,
+        quantity:1,
+        product_name:'❤️ হালুয়ায়ে মুহাব্বত ',
         date:new Date(),
         status:'pending',
         page:2
@@ -81,7 +83,7 @@ const Product_1 = () => {
     <div className="min-h-screen bg-green-100  md:p-8">
       <div className="bg-white shadow-lg rounded-lg overflow-hidden max-w-4xl mx-auto">
         <div className="bg-green-800 text-white text-center p-4 ">
-          <h1 className="text-3xl border-2 rounded-lg border-secondary p-2">পুরুষ এর হারানো যৌ-ব-ন ফিরিয়ে আনবে এই সঞ্জীবনী হনুয়া দেশের লক্ষ লক্ষ মানুষ উপকৃত হচ্ছে</h1>
+          <h1 className="text-3xl border-2 rounded-lg border-secondary p-2">পুরুষ এর হারানো যৌ-ব-ন ফিরিয়ে আনবে এই সঞ্জীবনী হালুয়া দেশের লক্ষ লক্ষ মানুষ উপকৃত হচ্ছে</h1>
           <h3 className="my-3 text-xl text-extra border-b-2 pb-2">
           নিয়মিত ৭ দিন সেবনেই প্রাথমিক ফলাফল বুঝতে শুরু করবেন। এবং ১ মাস সেবনে স্থায়ীভাবে সমাধান পাবেন 
           </h3>
@@ -93,13 +95,13 @@ const Product_1 = () => {
 
         <div className="p-4">
           <div className="text-center py-4 rounded-lg mb-4 border-2">
-            <h2 className="text-3xl font-bold">৫০০ হালুয়া মোহাব্বত - ১২০০/- টাকা</h2>
+            <h2 className="text-3xl font-bold">৫০০ গ্রাম হালুয়া মোহাব্বত - ১২০০/- টাকা</h2>
             <p className="text-xl bg-primary p-4 text-white mt-2">৭ দিনের জন্য সাথে পাচ্ছেন, ৫০ মিঃলিঃ একটি ম্যাসেজ অয়েল একদম ফ্রী</p>
           </div>
 
           <div className='flex justify-center text-center my-2'>
-  <a href="tel:01861499020">
-    <h3 className='text-2xl font-extrabold bg-primary rounded-lg text-white p-4'>প্রয়োজনে কল করুন 01861499020</h3>
+  <a href="tel:01811352982">
+    <h3 className='text-2xl font-extrabold bg-primary rounded-lg text-white p-4'>প্রয়োজনে কল করুন 01811352982</h3>
   </a>
 </div>
           <div className="text-center mb-4">
@@ -122,20 +124,20 @@ const Product_1 = () => {
                 {...register('name', { required: 'নাম দেয়া আবশ্যক' })}
                 type="text"
                 placeholder="আপনার নাম এখানে লিখুন"
-                className={`input input-bordered w-full ${errors.name ? 'border-red-500' : ''}`}
+                className={`input input-bordered input-primary w-full ${errors.name ? 'border-red-500' : ''}`}
               />
               {errors.name && <span className="text-red-500 text-sm">{errors.name.message}</span>}
             </div>
 
             <div className="form-control w-full mb-4">
               <label className="label">
-                <span className="label-text text-secondary text-2xl">আপনার মোবাইল নাম্বার লিখুন :</span>
+                <span className="label-text   text-secondary text-2xl">আপনার মোবাইল নাম্বার লিখুন :</span>
               </label>
               <input
                 {...register('phone', { required: 'মোবাইল নাম্বার দেয়া আবশ্যক' })}
                 type="tel"
                 placeholder="আপনার মোবাইল নাম্বার এখানে লিখুন"
-                className={`input input-bordered w-full ${errors.phone ? 'border-red-500' : ''}`}
+                className={`input input-bordered input-primary w-full ${errors.phone ? 'border-red-500' : ''}`}
               />
               {errors.phone && <span className="text-red-500 text-sm">{errors.phone.message}</span>}
             </div>
@@ -146,7 +148,7 @@ const Product_1 = () => {
               </label>
               <textarea
                 {...register('address', { required: 'ঠিকানা দেয়া আবশ্যক' })}
-                className={`textarea textarea-bordered h-24 w-full ${errors.address ? 'border-red-500' : ''}`}
+                className={`textarea textarea-bordered textarea-primary h-24 w-full ${errors.address ? 'border-red-500' : ''}`}
                 placeholder="জেলা, উপজেলা/ থানা, ডেলিভারি এরিয়া"
               ></textarea>
               {errors.address && <span className="text-red-500 text-sm">{errors.address.message}</span>}
@@ -161,7 +163,7 @@ const Product_1 = () => {
               <h3 className="text-xl font-semibold my-3">আপনার অর্ডার</h3>
               <div className="flex items-center gap-4 mb-6">
                 <div className="w-16 h-16 rounded-full overflow-hidden">
-                   <img src={imgProduct} alt="Avatar" className="w-full h-full object-cover" />
+                   <img src={product} alt="Avatar" className="w-full h-full object-cover" />
                 </div>
                 <div>
                   <h2 className="text-2xl font-bold">নাম :হালুয়ায়ে মুহাব্বত</h2>
@@ -176,36 +178,7 @@ const Product_1 = () => {
                 <h3 className="text-xl font-semibold">মোট মূল্য: ১২০০/- টাকা</h3>
               </div>
 
-              <div className="mb-6">
-                {/* <div className="flex items-center gap-4">
-                  <h3 className="text-xl font-semibold">কতো ফাইল নিবেন: {quantity}</h3>
-                  <div>
-                    <button
-                      type="button"
-                      className="bg-blue-500 text-white py-2 px-4 rounded mr-2"
-                      onClick={() => {
-                        const newQuantity = quantity + 1;
-                        setQuantity(newQuantity);
-                        setTotal(newQuantity * 1250);
-                      }}
-                    >
-                      +
-                    </button>
-                    <button
-                      type="button"
-                      disabled={quantity <= 1}
-                      className="bg-red-500 text-white py-2 px-4 rounded"
-                      onClick={() => {
-                        const newQuantity = quantity - 1;
-                        setQuantity(newQuantity);
-                        setTotal(newQuantity * 1250);
-                      }}
-                    >
-                      -
-                    </button>
-                  </div>
-                </div> */}
-              </div>
+           
 
               <div>
                 <h4 className="text-2xl text-primary font-semibold mb-4">ক্যাশ অন ডেলিভারি</h4>
@@ -291,14 +264,21 @@ const Product_1 = () => {
 
 
 
-
-
-
-<div className="bg-gray-100 p-4 rounded-lg">
-            <h2 className="text-xl font-bold text-center mb-2">মেসেজ অয়েল ব্যবহারের নিয়ম</h2>
-            <p>আর ম্যাসেজ অয়েল টি প্রতিদিন রাতে , আপনার বিশেষ অঙ্গে , নিচ থেকে ওপরে এভাবে ২/৩ মিনিট মালিশ করবেন।</p>
+<div className="bg-gray-100 p-4 rounded-lg text-center my-4 border-2 border-green-600">
+            <h2 className="text-3xl font-bold text-center mb-2 border-b-2 border-green-700 pb-2">খাওয়ার নিয়ম</h2>
+            <p className='text-2xl text-green-500'>রাতে, খাবার ৩০ মিনিট পরে, আধা-চামচ হালুয়া চেটে খাবেন অথবা পানিতে মিক্স করে খাবেন। অথবা দুধ থাকলে দুধের সাথে মিক্স করে খাবেন।</p>
           </div>
      
+
+
+
+<div className="bg-gray-100 p-4 rounded-lg text-center border-2 border-green-600">
+            <h2 className="text-xl font-bold text-center mb-2 border-b-2 border-green-700 pb-2">মেসেজ অয়েল ব্যবহারের নিয়ম</h2>
+            <p className='text-green-500 text-2xl'>ম্যাসেজ অয়েল টি প্রতিদিন রাতে , আপনার বিশেষ অঙ্গে , নিচ থেকে ওপরে এভাবে ২/৩ মিনিট মালিশ করবেন।</p>
+          </div>
+     
+
+
 
 
       
@@ -316,7 +296,7 @@ const Product_1 = () => {
       </div>
     
     </div>
-    <Footer number={'01861499020'}/>
+    <Footer number={'01811352982'}/>
     </div>
      );
 };
